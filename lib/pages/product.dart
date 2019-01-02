@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class ProductPage extends StatelessWidget {
   final String title;
@@ -32,7 +33,8 @@ class ProductPage extends StatelessWidget {
       ),
     ), onWillPop: () {
       print('Back Button Pressed');
-      Navigator.pop(context); // Default behavior is to hold page in focus
+      Navigator.pop(context, false); // Default behavior is to hold page in focus
+      return Future.value(false);
     },);
   }
 }
