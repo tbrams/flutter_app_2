@@ -9,6 +9,17 @@ class ProductsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('EasyList'),
       ),
+      drawer: Drawer(
+          child: Column(
+        children: <Widget>[
+          AppBar(title: Text("Choose"),
+          automaticallyImplyLeading: false,),
+          ListTile(
+            title: Text("Manage Products"),
+            onTap: () {},
+          )
+        ],
+      )),
       body: ProductManager(),
     );
   }
