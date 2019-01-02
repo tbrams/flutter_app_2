@@ -8,7 +8,7 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(child: Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
@@ -24,12 +24,15 @@ class ProductPage extends StatelessWidget {
             padding: EdgeInsets.all(10.0),
             child: RaisedButton(
               color: Theme.of(context).accentColor,
-              child: Text('DELETE'),
+              child: Text('Delete'),
               onPressed: () => Navigator.pop(context, true),
             ),
           )
         ],
       ),
-    );
+    ), onWillPop: () {
+      print('Back Button Pressed');
+      Navigator.pop(context); // Default behavior is to hold page in focus
+    },);
   }
 }
