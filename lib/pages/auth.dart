@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './Products.dart';
+import './products.dart';
 
 class AuthPage extends StatelessWidget {
   @override
@@ -10,16 +10,13 @@ class AuthPage extends StatelessWidget {
         title: Text('Login'),
       ),
       body: Center(
-          child: RaisedButton(
-        child: Text("Login"),
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => ProductsPage()),
-          );
-        },
-      )),
+        child: RaisedButton(
+          child: Text('LOGIN'),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/');
+          },
+        ),
+      ),
     );
   }
 }

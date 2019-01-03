@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ProductListTab extends StatelessWidget {
+class ProductListPage extends StatelessWidget {
   @override
-    Widget build(BuildContext context) {
-        return Center(child: Text('All Product'),);
-    }
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('All Products'),
+    );
+  }
 }
