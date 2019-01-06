@@ -64,15 +64,22 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
   }
 
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double maxWidth = deviceWidth > 650.0? 500.0 : deviceWidth*.95;
+    final double maxPadding = deviceWidth-maxWidth;
+
     return Container(
         margin: EdgeInsets.all(10.0),
-        child: ListView(children: <Widget>[
+        child: ListView(
+          padding:EdgeInsets.symmetric(horizontal:maxPadding/2),
+          children: <Widget>[
           _buildTitleTextfield(),
           _buildDescriptionTextfield(),
           _buildPriceTextfield(),
           SizedBox(height: 10.0),
           RaisedButton(
             child: Text('Save'),
+            textColor: Colors.white,
             onPressed: _submitForm,
           )
         ]));
