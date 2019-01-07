@@ -12,12 +12,15 @@ class ProductCreatePage extends StatefulWidget {
 }
 
 class _ProductCreatePageState extends State<ProductCreatePage> {
-  @override
-  String _titleValue = '';
-  String _descriptionValue = '';
-  double _priceValue;
+  final Map<String, dynamic> _formData = {
+    'title':null,
+    'description':null,
+    'price':null,
+     'image': 'assets/food.jpg'
+  }; 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  @override
   Widget _buildTitleTextfield() {
     return TextFormField(
       validator: (String value) {
@@ -27,9 +30,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
         }
       },
       onSaved: (String value) {
-        setState(() {
-          _titleValue = value;
-        });
+          _formData['title'] = value;
       },
       decoration: InputDecoration(labelText: 'Product Title'),
     );
@@ -44,9 +45,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
         }
       },
       onSaved: (String value) {
-        setState(() {
-          _descriptionValue = value;
-        });
+          _formData['description'] = value;
       },
       maxLines: 4,
       decoration: InputDecoration(labelText: 'Product Description'),
@@ -63,9 +62,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
         }
       },
       onSaved: (String value) {
-        setState(() {
-          _priceValue = double.parse(value);
-        });
+          _formData['price'] = double.parse(value);
       },
       keyboardType: TextInputType.number,
       decoration: InputDecoration(labelText: 'Product Price'),
@@ -76,13 +73,7 @@ class _ProductCreatePageState extends State<ProductCreatePage> {
     _formKey.currentState.save(); // Will trigger onSaved() in FormTextFields
     if (!_formKey.currentState.validate()) return;
 
-    final Map<String, dynamic> product = {
-      'title': _titleValue,
-      'description': _descriptionValue,
-      'price': _priceValue,
-      'image': 'assets/food.jpg'
-    };
-    widget.addProduct(product);
+    widget.addProduct(_formData);
     Navigator.pushReplacementNamed(context, '/products');
   }
 
