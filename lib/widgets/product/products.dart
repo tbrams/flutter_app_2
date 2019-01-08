@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import './product_card.dart';
 
 class Products extends StatelessWidget {
@@ -8,12 +9,12 @@ class Products extends StatelessWidget {
     print('[Products Widget] Constructor');
   }
 
-
   Widget _buildProductList() {
     Widget productCards;
     if (products.length > 0) {
       productCards = ListView.builder(
-        itemBuilder: (BuildContext context, int index)=>ProductCard(products[index], index),
+        itemBuilder: (BuildContext context, int index) =>
+            ProductCard(products[index], index),
         itemCount: products.length,
       );
     } else {

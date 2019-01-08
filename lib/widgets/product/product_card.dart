@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 
 import './price_tag.dart';
+import './address_tag.dart';
 import '../ui_elements/title_default.dart';
-import '../product/address_tag.dart';
 
 class ProductCard extends StatelessWidget {
   final Map<String, dynamic> product;
-  final int index;
+  final int productIndex;
 
-  ProductCard(this.product, this.index);
+  ProductCard(this.product, this.productIndex);
 
   Widget _buildTitlePriceRow() {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      TitleDefault(product['title']),
-      SizedBox(
-        width: 8.0,
+    return Container(
+      padding: EdgeInsets.only(top: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          TitleDefault(product['title']),
+          SizedBox(
+            width: 8.0,
+          ),
+          PriceTag(product['price'].toString())
+        ],
       ),
-      PriceTag(product['price'].toString()),
-    ]);
+    );
   }
 
   Widget _buildActionButtons(BuildContext context) {
@@ -28,13 +34,14 @@ class ProductCard extends StatelessWidget {
           icon: Icon(Icons.info),
           color: Theme.of(context).accentColor,
           onPressed: () => Navigator.pushNamed<bool>(
-              context, '/product/' + index.toString()),
+              context, '/product/' + productIndex.toString()),
         ),
         IconButton(
           icon: Icon(Icons.favorite_border),
           color: Colors.red,
-          onPressed: () {},
-        ),
+          onPressed: () => Navigator.pushNamed<bool>(
+              context, '/product/' + productIndex.toString()),
+        )
       ],
     );
   }
@@ -46,8 +53,8 @@ class ProductCard extends StatelessWidget {
         children: <Widget>[
           Image.asset(product['image']),
           _buildTitlePriceRow(),
-          AddressTag('Union Square, San Fransisco'),
-          _buildActionButtons(context),
+          AddressTag('Union Square, San Francisco'),
+          _buildActionButtons(context)
         ],
       ),
     );

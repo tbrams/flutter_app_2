@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TitleDefault extends StatelessWidget {
-  final String myTitle;
-  TitleDefault(this.myTitle);
+  final String title;
+
+  TitleDefault(this.title);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      myTitle,
+      title,
       style: TextStyle(
           fontSize: 26.0, fontWeight: FontWeight.bold, fontFamily: 'Oswald'),
     );
