@@ -5,7 +5,7 @@ import './address_tag.dart';
 import '../ui_elements/title_default.dart';
 import '../../models/product.dart';
 
-class ProductCard extends StatelessWidget {
+class  ProductCard extends StatelessWidget {
   final Product product;
   final int productIndex;
 
