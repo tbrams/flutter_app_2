@@ -5,13 +5,14 @@ import 'package:http/http.dart' as http;
 import '../models/product.dart';
 import '../models/user.dart';
 
+final String url = 'https://flutter-app-117.firebaseio.com/products.json';
+
 mixin ConnectedProductsModel on Model {
   List<Product> _products = [];
   User _authenticatedUser;
   int _selProductIndex;
 
   void addProduct(String t, String d, String i, double p) {
-    final String url = 'https://flutter-app-117.firebaseio.com/products.json';
     final Map<String, dynamic> productData = {
       'title': t,
       'description': d,
@@ -20,7 +21,9 @@ mixin ConnectedProductsModel on Model {
       'price': p
     };
 
-    http.post(url, body: json.encode(productData)).then((http.Response response) {
+    http
+        .post(url, body: json.encode(productData))
+        .then((http.Response response) {
       final Map<String, dynamic> responseData = json.decode(response.body);
       final Product newProduct = Product(
           id: responseData['name'],
@@ -84,6 +87,13 @@ mixin ProductsModel on ConnectedProductsModel {
     if (productId != null) {
       notifyListeners();
     }
+  }
+
+  void fetchProducts() {
+    http.get(url).then((http.Response response){
+      print(json.decode(response.body));
+      
+    });
   }
 
   void toggleFavoriteStatus() {
