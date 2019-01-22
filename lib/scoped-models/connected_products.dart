@@ -18,7 +18,9 @@ mixin ConnectedProductsModel on Model {
       'description': d,
       'image':
           'https://upload.wikimedia.org/wikipedia/commons/7/70/Chocolate_%28blue_background%29.jpg',
-      'price': p
+      'price': p,
+      'userEmail' : _authenticatedUser.email,
+      'userId' : _authenticatedUser.id
     };
 
     http
@@ -91,8 +93,23 @@ mixin ProductsModel on ConnectedProductsModel {
 
   void fetchProducts() {
     http.get(url).then((http.Response response){
-      print(json.decode(response.body));
-      
+      final List<Product> fetchedProductsList = [];
+      final Map<String,dynamic> productListData = json.decode(response.body);
+      productListData.forEach((String productId, dynamic productData){
+        final Product product = Product(
+          id:productId,
+          title: productData['title'],
+          description:productData['description'],
+          image:productData['image'],
+          price:productData['price'],
+          userEmail: productData['userEmail'],
+          userId:productData['userId']
+        );
+        fetchedProductsList.add(product);
+
+      });
+      _products = fetchedProductsList;
+      notifyListeners();
     });
   }
 
